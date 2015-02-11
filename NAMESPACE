@@ -1,0 +1,3 @@
+exportPattern("^[[:alpha:]]+")
+importFrom('Hmisc',minor.tick)
+importFrom('plotrix',thigmophobe.labels)

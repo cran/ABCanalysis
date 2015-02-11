@@ -1,0 +1,15 @@
+55c4d86981d8654c5c513f66a170cba7 *DESCRIPTION
+333bf7b2244b4762f1ce58f1c2833020 *NAMESPACE
+0c4e9db2be86985379cc5b3dddbf6236 *R/ABCanalysis.R
+03ad442306054775caf3c8463fb84aec *R/ABCanalysisPlot.R
+ada46e6875e54c6ed8720e48aa10b474 *R/ABCcleanData.R
+c8ae58580921577f59b0fafbff45c800 *R/ABCcurve.R
+ccc696223d3d74d1a56a04e30848f0f0 *R/ABCplot.R
+84d0f96e05037498e33d64eb37dcde41 *data/SwissInhabitants.rda
+16ee42721a4d29b73e7b82046c877e65 *man/ABCanalysis-package.Rd
+ee8d2b2cb8de32aa5f74b4da07104efc *man/ABCanalysis.Rd
+8d22f124fd72c0da11e4df1efba79fc7 *man/ABCanalysisPlot.Rd
+b257b0ddf861797d05cdbe3919ff6568 *man/ABCcleanData.Rd
+9c67f3481e94ab06d4bf78b9e8e5d19c *man/ABCcurve.Rd
+5c030d809d7ce6f30b560e20b017a5b7 *man/ABCplot.Rd
+f38dc0878d05863ee9e9aa345a6de6b8 *man/SwissInhabitants.Rd
