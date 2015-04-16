@@ -50,6 +50,11 @@ x=(1:rows)/rows
 V=spline(x,y,xout=p)
 Effort=V$x
 Yield=V$y
+#Fehlerabfang der Interpolation
+inds=which(Yield>=1)
+ind1=min(inds)
+if(ind1<length(Yield))
+  Yield[c(ind1:length(Yield))]=1
 
 n=length(Effort)
 Curvengleichung=splinefun(Effort,Yield) 

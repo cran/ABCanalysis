@@ -143,21 +143,6 @@ if(!is.null(Data)){
     points(c(abcres$A[1],abcres$A[1]),c(0,abcres$A[2]),col=farb.col[2],type='l',lty=linientyp)
     points(c(abcres$C[1],abcres$C[1]),c(0,abcres$C[2]),col=farb.col[2],type='l',lty=linientyp)  
     
-    #diagonale: Skewness bzw Gleichgewichtspunkt
-#     pUnif = seq(from=0,by=0.001,to=1)
-#     A = min(Data,na.rm=TRUE) 
-#     if(!is.null(Data)){
-#     A = min(Data,na.rm=TRUE) 
-#     MaxX = max(Data,na.rm=TRUE)
-#     }else{
-#       A=0
-#       MaxX=1
-#     }
-#     Bmax = MaxX-A
-#     ABCuniform = (-0.5*Bmax*pUnif^2+MaxX*pUnif)/(A+0.5*Bmax)
-#     ind=which.min(abs(pUnif-(1-ABCuniform)))
-#    # points(c(0,1),c(1,0),type='c',ljoin='mitre',col=farb.col[1])
-
 }
 #damit Buchtabe C und Legende sich nicht ueberschneiden
 if((abcres$A[1]+abcres$C[1])/2+max(abs(abcres$A[1]-abcres$C[1]),0.1)+0.02<0.8){

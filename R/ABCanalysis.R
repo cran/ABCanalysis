@@ -103,23 +103,21 @@ if(Effort[BreakEvenInd]<Effort[ParetoPointInd]){
   
 C=curve[bgrenze[1],]
 
-
-
 ## Datenvektor in 3 Gruppen Teilen
-#Zuerst: Generiere empirische Kurven direkt aus den Daten
 if(!is.null(Data)){ 
-       sorted=sort(Data,decreasing=TRUE)
-       Indizies=order(Data,decreasing=TRUE)
-       N=sum(Data)
-       Anteil=sorted/N
-       y=cumsum(Anteil)
+#Statt nach in Y-Werten suchen, suchen wir in x-Werten, da diese Eindeutig
+#y-Werte koennen dagegen in spezialfaellen mehrfach belegt sein
+    Indizies=order(Data,decreasing=TRUE)
+    rows=length(Data)
+    x=1:rows/rows
 # Vergleiche empirische Kurve mit generierten Ma? aus theoretischer Spline Kurve
-    Aindvor=which(y<Yield[JurenInd],arr.ind=TRUE)# Suche alle Indizes bis zur ABGrenze
-    ABind=which(y<Yield[bgrenze],arr.ind=TRUE) # Suche alle Indizes bis zur BCgrenze
+    Aindvor=which(x<A[1],arr.ind=TRUE)# Suche alle Indizes bis zur ABGrenze
+    ABind=which(x<C[1],arr.ind=TRUE) # Suche alle Indizes bis zur BCgrenze
 #Setzte in unsortierten Datenvektor die Indizes
     Bind=Indizies[setdiff(ABind,Aindvor)] #Bindizes sind Differenz aus den beiden Zeilen davor
     Aind=Indizies[Aindvor] 
-    Cind=Indizies[which(y>Yield[bgrenze],arr.ind=TRUE)]
+    Cind=Indizies[which(x>C[1],arr.ind=TRUE)]
+
 }else{ #Keine empirischer Datensatz sondern vorgabe theoretischer Kurve
   Bind=NULL
   Cind=NULL
@@ -132,7 +130,6 @@ if(!is.null(Data)){
     if(missing(Data)|is.null(Data)){
       abc=ABCanalysisPlot(ABCcurvedata=ABCcurvedata)$ABCanalysis  
     }else{
-          print('test')
       abc=ABCanalysisPlot(Data)$ABCanalysis
     }
   }  

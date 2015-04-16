@@ -49,13 +49,11 @@ if(missing(style)){
   farb.labels <- c(expression(italic("data")),expression(italic("identity")),expression(italic("uniform")),'')
 
 }else{
-  #ylab='yield Y'
-  #xlab='effort E'
-  #farb.col=c('blue','palegreen4','palegreen3') 
+
   ylab='fraction of sum of largest data'
   xlab='fraction of data'
   farb.col=c('blue',colors()[452],'green',colors()[175])
-  #farb.labels <- c(expression(italic("data")),expression(italic("identity")),expression(italic("uniform")),expression(italic("equilibrium")))
+
   farb.labels <- c(expression(italic("data")),expression(italic("identity")),expression(italic("uniform")),expression(italic("equilibrium")))
 
 }
