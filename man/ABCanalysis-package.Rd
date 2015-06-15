@@ -49,3 +49,6 @@ Michael Thrun, Jorn Lotsch, Alfred Ultsch
 	SetB=SwissInhabitants[abc$Bind]
 	SetC=SwissInhabitants[abc$Cind]
 }
+\references{
+Ultsch. A ., Lotsch J.: Computed ABC Analysis for rational Selection of most informative Variables in multivariate Data, PLoS One, Jun 10, 10(6), e0129767, 2015.
+}

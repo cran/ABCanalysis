@@ -72,7 +72,9 @@ Michael Thrun
 	Cgroup=SwissInhabitants[C]
 
 }
-
+\references{
+Ultsch. A ., Lotsch J.: Computed ABC Analysis for rational Selection of most informative Variables in multivariate Data, PLoS One, Jun 10, 10(6), e0129767, 2015.
+}
 \keyword{ABC}
 \keyword{ABCanalysis}
 \keyword{ABC analysis}

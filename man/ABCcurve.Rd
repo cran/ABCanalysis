@@ -35,6 +35,9 @@ Michael Thrun
 	\url{http://www.uni-marburg.de/fb12/datenbionik}
 
 }
+\references{
+Ultsch. A ., Lotsch J.: Computed ABC Analysis for rational Selection of most informative Variables in multivariate Data, PLoS One, Jun 10, 10(6), e0129767, 2015.
+}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{ABCcurve}
