@@ -102,7 +102,6 @@ if(Effort[BreakEvenInd]<Effort[ParetoPointInd]){
 #print(curve[bgrenze[1],])
   
 C=curve[bgrenze[1],]
-
 ## Datenvektor in 3 Gruppen Teilen
 if(!is.null(Data)){ 
 #Statt nach in Y-Werten suchen, suchen wir in x-Werten, da diese Eindeutig

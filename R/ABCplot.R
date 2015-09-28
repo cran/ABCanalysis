@@ -1,4 +1,4 @@
-ABCplot=function(Data,LineType=0,LineWidth=3,RemoveSmallYields=FALSE,ShowUniform=TRUE,title,ABCcurvedata,defaultAxes=TRUE){
+ABCplot=function(Data,LineType=0,LineWidth=3,ShowUniform=TRUE,title,ABCcurvedata,defaultAxes=TRUE){
 # res= ABCplot(Data)
 # display ABC Curve : cumulative percentage of largest Data (Effort) vs cumlative percentage of sum of largest Data (Yield)
 # 
@@ -9,8 +9,7 @@ ABCplot=function(Data,LineType=0,LineWidth=3,RemoveSmallYields=FALSE,ShowUniform
 # OPTIONAL
 # LineType           for plot default:  LineType=0 for Line, other numbers see documentation about pch
 # LineWidth          Breite der ABC kurve
-# RemoveSmallYields  ==1 bedeutet die kleinen Datenwerte, die in Summme <0.5% der GesamtData 
-#                   ausmachen werden ignoriert. default:  RemoveSmallYields==0
+#
 # ShowUniform    ==1 (default) bedeutet  die ABC kurve der Uniform verteilung Unifirm[0,beliebig] wird eingezeichnet
 # title             string, label for the title  of the plot 
 # style             type fancy if you would like to plot in an different style
@@ -35,7 +34,7 @@ style=TRUE
  }
 if(missing(title)){title='ABC plot'}
  if(missing(ABCcurvedata)){      
-   curve = ABCcurve(Data,RemoveSmallYields=RemoveSmallYields)}
+   curve = ABCcurve(Data)}
 
 
 Effort=curve$Curve[,'Effort']
@@ -69,13 +68,18 @@ if(!ShowUniform){#Dann ist dieser Plot im Vordergrund
 
     #gleichverteilung
     pUnif = seq(from=0,by=0.01,to=1)
-    if(!is.null(Data)){
-    A = min(Data,na.rm=TRUE) 
-    MaxX = max(Data,na.rm=TRUE)
+    if(!is.null(curve$CleanedData)){
+    A = min(curve$CleanedData,na.rm=TRUE) 
+    MaxX = max(curve$CleanedData,na.rm=TRUE)
+      if(A==MaxX){
+        A=0
+        MaxX=1
+      }
     }else{
       A=0
       MaxX=1
     }
+
     B = MaxX-A
     ABCuniform = (-0.5*B*pUnif^2+MaxX*pUnif)/(A+0.5*B)
     if(missing(style)){
@@ -131,7 +135,7 @@ if(defaultAxes){
   }  
 }
 if(!missing(style)){
-  #loadRpackage('Hmisc')
+  #requireRpackage('Hmisc')
         minor.tick(ny=20, nx=20)
         box()
         }else{

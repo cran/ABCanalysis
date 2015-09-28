@@ -10,7 +10,8 @@ Displays ABC plot with ABCanalysis
 }
 \usage{
 ABCanalysisPlot(Data, LineType = 0, LineWidth = 3, 
-ShowUniform = TRUE,title, limits = TRUE, MarkPoints = TRUE, ABCcurvedata)
+ShowUniform = TRUE,title, limits = TRUE, MarkPoints = TRUE,
+ABCcurvedata,ResetPlotDefaults=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -35,6 +36,9 @@ boolean, = TRUE, lines of division in A, B and C are drawn, default = FALSE
 boolean, optional, default= TRUE, Mark the three points of interest}
   \item{ABCcurvedata}{
   optional, see \link{ABCcurve}
+}
+  \item{ResetPlotDefaults}{
+  optional, default =TRUE. If ResetPlotDefaults=FALSE, multiple plots in one window possible, but no resetting of plot to default parameters.
 }
 }
 
@@ -63,8 +67,20 @@ The diagonal from (0,1) to (1,0) is the equilibrium, where effort equals yield.
  \code{\link{ABCanalysis}}
 }
 \examples{
+## Standard Example
 	data("SwissInhabitants")
 	abc=ABCanalysisPlot(SwissInhabitants)
+##	Multiple plots in one Window:
+	m=runif(4,100,200)
+	s=runif(4,1,10)
+	Data=sapply(1:4,FUN=function(x,m,s) rnorm(1000,m,s),m,s)
+	# windows() #screen devices should not be used in examples etc
+	par(mfrow=c(2,2))
+	for (i in 1:4)
+	{
+		ABCanalysisPlot(Data[,i],ResetPlotDefaults=FALSE)
+	}
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

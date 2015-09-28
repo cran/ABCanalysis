@@ -7,23 +7,18 @@
  Only the first column of Data is used, anything not beeinh positive numerical value is set to zero
 }
 \usage{
-ABCcleanData(Data,RemoveSmallYields)
+ABCcleanData(Data)
 }
 \arguments{
   \item{Data}{
 vector[1:n] describes an array of data: n cases in rows of one variable
 }
-  \item{RemoveSmallYields}{
-		bool, if RemoveSmallYields ==TRUE => the smallest data up to a cumulated sum of less than
-                                  1\% of the total sum (yield) is removed 
-}
+
 }
 \details{
  Data <0 are set to zero,  non-numeric values (NA,NaN,etc.) in Data are set to zero
  strings and chars are set to zero   
  infinitive numbers are set to max(Data)
- if RemoveSmallYields ==TRUE => the smallest data up to a cumulated sum of less than
- 0.5 \% of the total sum (yield) is removed 
 }
 \value{
 Output is of type list which's parts are described in the following

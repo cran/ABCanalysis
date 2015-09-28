@@ -8,17 +8,14 @@
  with spline interpolation (second order, piecewise) of values in-between.
 }
 \usage{
-ABCcurve(Data,RemoveSmallYields, p)
+ABCcurve(Data, p)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{Data}{
 vector[1:n] describes an array of data: n cases in rows of one variable
 }
-  \item{RemoveSmallYields}{
-		boolean, optional, if RemoveSmallYields ==TRUE => the smallest data up to a cumulated sum of less than
-                                  1\% of the total sum (yield) is removed, default=FALSE
-}
+
   \item{p}{
 		optional, an vector of values specifying where interpolation takes place, created by \code{\link{seq}} of package base}
 }

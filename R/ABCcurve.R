@@ -1,4 +1,4 @@
- ABCcurve=function(Data,RemoveSmallYields=FALSE,p){
+ ABCcurve=function(Data,p){
 # res = ABCcurve(Data,GiniSteigung)
 # ABC Curve : cumulative fraction of largest Data in population vs fraction of population
 #
@@ -6,9 +6,7 @@
 # Data(1:n)          data vector,only positive data will be used
 # 
 # OPTIONAL
-# RemoveSmallYields   bool, if RemoveSmallYields ==TRUE => the smallest data up to a cumulated sum of less than
-#                                  1# of the total sum (yield) is removed 
-#                 
+#              
 # p                  x-werte fuer Spline Interpolation: wenn vorgegeben dann werden diese genommen
 # 
 # OUTPUT
@@ -20,7 +18,7 @@
 #author: MT 11/2014
 # 1.Editor MT 01/2015
 
-cleanData=ABCcleanData(Data,RemoveSmallYields=RemoveSmallYields)$CleanedData
+cleanData=ABCcleanData(Data)$CleanedData
 rows=length(cleanData)
 if(missing(p)){
   if(rows<101){ p=seq(from=0,to=1,by=0.01)

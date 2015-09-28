@@ -8,7 +8,7 @@ displays an ABC Curve as an alternative to an Lorenz curve
 Plots cumulative percentage of largest data (effort) vs. cumulative percentage of sum of largest data (yield)
 }
 \usage{
-ABCplot(Data, LineType = 0, LineWidth = 3,RemoveSmallYields, ShowUniform = TRUE,
+ABCplot(Data, LineType = 0, LineWidth = 3, ShowUniform = TRUE,
  title, ABCcurvedata,defaultAxes = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -22,10 +22,7 @@ ABCplot(Data, LineType = 0, LineWidth = 3,RemoveSmallYields, ShowUniform = TRUE,
   \item{LineWidth}{
 		integer, width of Line, see \code{lwd} in \link{par}
 }
-  \item{RemoveSmallYields}{
-		bool, if RemoveSmallYields ==TRUE => the smallest data up to a cumulated sum of less than
-                                  1\% of the total sum (yield) is removed 
-}
+
   \item{ShowUniform}{
 		bool, =TRUE: the ABC curve of the uniform distribution is shown in plot
 }
