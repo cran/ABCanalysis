@@ -33,7 +33,7 @@ Michael Thrun
 
 }
 \references{
-Ultsch. A ., Lotsch J.: Computed ABC Analysis for rational Selection of most informative Variables in multivariate Data, PLoS One, Jun 10, 10(6), e0129767, 2015.
+Ultsch. A ., Lotsch J.: Computed ABC Analysis for Rational Selection of Most Informative Variables in Multivariate Data, PloS one, Vol. 10(6), pp. e0129767. doi 10.1371/journal.pone.0129767, 2015.
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

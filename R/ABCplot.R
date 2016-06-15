@@ -52,7 +52,6 @@ if(missing(style)){
   ylab='fraction of sum of largest data'
   xlab='fraction of data'
   farb.col=c('blue',colors()[452],'green',colors()[175])
-
   farb.labels <- c(expression(italic("data")),expression(italic("identity")),expression(italic("uniform")),expression(italic("equilibrium")))
 
 }
@@ -111,7 +110,7 @@ points(BreakEvenPoint[1],BreakEvenPoint[2],pch=8,lwd=1.5,col='green',cex=1.5,asp
 if(!is.null(Data)){
 if(length(curve$CleanedData)<20){
   
-  sorted=sort(curve$CleanedData,decreasing=TRUE)
+  sorted=sort(na.last=T,curve$CleanedData,decreasing=TRUE)
   Anteil=sorted
   y=cumsum(Anteil)
   y=y/tail(y,1)
@@ -134,14 +133,6 @@ if(defaultAxes){
         legend("bottomright",bty = "n",legend=farb.labels,text.col=farb.col)
   }  
 }
-if(!missing(style)){
-  #requireRpackage('Hmisc')
-        minor.tick(ny=20, nx=20)
-        box()
-        }else{
-          minor.tick(ny=20, nx=20)
-          box(col='grey')
-        }
 
 invisible(list(ABCx=Effort,ABCy=Yield))
 }

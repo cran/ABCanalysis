@@ -19,7 +19,7 @@ ABCRemoveSmallYields=function(Data,CumSumSmallestPercentage=0.5){
    CleanDatares=ABCcleanData(Data)
    CleanData=CleanDatares$CleanedData
   #die kleinsten Daten, die zusammen weniger als CumSumSmallestPercentage# ausmachen identifizieren
-  SortedData=sort(CleanData,decreasing=FALSE)
+  SortedData=sort(na.last=T,CleanData,decreasing=FALSE)
   TotalYield = sum(SortedData)
   CumSumPercentage=round(cumsum(SortedData/TotalYield*100),0)
  SmallInd=which(CumSumPercentage<CumSumSmallestPercentage) #In Prozent

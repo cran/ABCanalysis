@@ -25,7 +25,7 @@ if(missing(p)){
   }else{ p=seq(from=0,to=1,by=0.001)}
 }   
 
-sorted=sort(cleanData,decreasing=TRUE)
+sorted=sort(na.last=T,cleanData,decreasing=TRUE)
 #N=sum(cleanData)
 #Anteil=sorted/N
 Anteil=sorted
