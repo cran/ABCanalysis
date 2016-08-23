@@ -1,5 +1,4 @@
 exportPattern("^[[:alpha:]]+")
-importFrom('Hmisc',minor.tick)
 importFrom('plotrix',thigmophobe.labels)
 importFrom("grDevices", "colors")
 importFrom("graphics", "axis", "box", "legend", "par", "plot","points")

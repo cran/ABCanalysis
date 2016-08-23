@@ -18,17 +18,9 @@ subset C of non-profitable values, i.e. the smallest data sets ("the trivial man
 This package calculates the three subsets A, B and C by means of an algorithm based on 
 statistically valid definitions of thresholds for the three sets A,B and C.
 }
-%\details{
-%\tabular{ll}{
-%Package: \tab dbt.ABC2\cr
-%Type: \tab Package\cr
-%Version: \tab 1.0\cr
-%Date: \tab 2015-02-11\cr
-%License: \tab What license is it under?\cr
-%}
-%~~ An overview of how to use the package, ~~
-%~~ including the most important functions ~~
-%}
+\note{
+Check out our new Umatrix package for visualisation and clustering of high-dimensional data on our Webpage.
+}
 
 \author{
 Michael Thrun, Jorn Lotsch, Alfred Ultsch

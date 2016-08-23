@@ -14,18 +14,18 @@ Computed ABC analysis: calculates a division of the data in 3 classes A, B and C
  C=Data[Cind] : with much effort low yield
 }
 \usage{
-ABCanalysis(Data,PlotIt,ABCcurvedata)
+ABCanalysis(Data,ABCcurvedata,PlotIt=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{Data}{
 vector(1:n) describes an array of data: n cases in rows of one variable, if matrix or dataframe then first column will be used.
 }
-  \item{PlotIt}{
-	if variable is used, a plot is made, set with arbitrary value
-}
   \item{ABCcurvedata}{
 	only for internal usage, list from \link{ABCcurve}
+}
+  \item{PlotIt}{
+	default(FALSE), if variable is used, a plot is made, set with arbitrary value
 }
 }
 \details{
@@ -73,7 +73,7 @@ Michael Thrun
 
 }
 \references{
-Ultsch. A ., Lotsch J.: Computed ABC Analysis for rational Selection of most informative Variables in multivariate Data, PLoS One, Jun 10, 10(6), e0129767, 2015.
+Ultsch. A ., Lotsch J.: Computed ABC Analysis for Rational Selection of Most Informative Variables in Multivariate Data, PloS one, Vol. 10(6), pp. e0129767. doi 10.1371/journal.pone.0129767, 2015.
 }
 \keyword{ABC}
 \keyword{ABCanalysis}

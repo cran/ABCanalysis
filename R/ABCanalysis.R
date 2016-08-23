@@ -1,4 +1,4 @@
-ABCanalysis=function(Data,PlotIt,ABCcurvedata){
+ABCanalysis=function(Data,ABCcurvedata,PlotIt=FALSE){
 # abcres = ABCanalysis(Data=ABCcleanData(Data)$CleanedData)
 # divide the Data in 3 classes A, B,C
 # A==Data(Aind) : mit wenig aufwand viel ertrag! 
@@ -43,7 +43,7 @@ if(missing(Data)){
   }
 }
   
-if(missing(PlotIt)){#Wenn nicht geplottet wird muessen die Daten berechnet werden
+if(!PlotIt){#Wenn nicht geplottet wird muessen die Daten berechnet werden
   if(missing(ABCcurvedata)){
     # CleanData=1; # bedeutet die kleinen Yieldwerte, die in Summme <0.5% der Gesamtyield 
      ABCcurvedata = ABCcurve(Data)
@@ -102,7 +102,11 @@ if(Effort[BreakEvenInd]<Effort[ParetoPointInd]){
 #print(curve[bgrenze[1],])
   
 C=curve[bgrenze[1],]
+
+
+
 ## Datenvektor in 3 Gruppen Teilen
+
 if(!is.null(Data)){ 
 #Statt nach in Y-Werten suchen, suchen wir in x-Werten, da diese Eindeutig
 #y-Werte koennen dagegen in spezialfaellen mehrfach belegt sein
@@ -117,6 +121,19 @@ if(!is.null(Data)){
     Aind=Indizies[Aindvor] 
     Cind=Indizies[which(x>C[1],arr.ind=TRUE)]
 
+# #Zuerst: Generiere empirische Kurven direkt aus den Daten  
+#        sorted=sort(na.last=T,Data,decreasing=TRUE)
+#        Indizies=order(Data,decreasing=TRUE)
+#        N=sum(Data)
+#        Anteil=sorted/N
+#        y=cumsum(Anteil)
+# # Vergleiche empirische Kurve mit generierten Ma? aus theoretischer Spline Kurve
+#     Aindvor=which(y<A[2],arr.ind=TRUE)# Suche alle Indizes bis zur ABGrenze
+#     ABind=which(y<C[2],arr.ind=TRUE) # Suche alle Indizes bis zur BCgrenze
+# #Setzte in unsortierten Datenvektor die Indizes
+#     Bind=Indizies[setdiff(ABind,Aindvor)] #Bindizes sind Differenz aus den beiden Zeilen davor
+#     Aind=Indizies[Aindvor] 
+#     Cind=Indizies[which(y>C[2],arr.ind=TRUE)]
 }else{ #Keine empirischer Datensatz sondern vorgabe theoretischer Kurve
   Bind=NULL
   Cind=NULL

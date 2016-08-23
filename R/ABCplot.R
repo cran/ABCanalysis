@@ -22,7 +22,7 @@ ABCplot=function(Data,LineType=0,LineWidth=3,ShowUniform=TRUE,title,ABCcurvedata
 # author: MT 11/2014
 # 1.Editor MT 01/2015
 style=TRUE
-  #require(Hmisc) #Noch anders zu loesen
+ # require(Hmisc) #Noch anders zu loesen
   check=F
   if(missing(Data)){ 
   curve = ABCcurvedata
