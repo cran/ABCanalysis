@@ -31,8 +31,9 @@ style=TRUE
         #  farb.col=c('paleturquoise3','magenta','blue','palegreen4','palegreen3','plum2)
       #farb.labels <- c(expression(italic("Equilibrium")),expression(italic("set limits")),expression(italic("data")),expression(italic("uniform")),expression(italic("identity")))
       farb.labels <- c('',expression(italic("set limits")),expression(italic("data")),expression(italic("uniform")),expression(italic("identity")))
-      
-  
+
+      requireNamespace("plotrix")      
+
 if(missing(style)){style=FALSE}
   if(missing(Data)){
     Data=NULL #Faulheitsfunktion, auch Listen?bergabe moeglich
@@ -87,15 +88,15 @@ if(style==FALSE){
    
   if(!is.null(Data)){
       if(abs(abcres$A[1]-abcres$C[1])>0.1){
-        thigmophobe.labels(x=abcres$A[1]/2,y=abcres$A[2],paste0('A:n=',nA),col='black', cex=1) # Gr??e
-        thigmophobe.labels(x=(abcres$C[1]-abcres$A[1])/2+abcres$A[1],y=abcres$C[2],paste0('B:n=',nB),col='black',cex=1)
+        plotrix::thigmophobe.labels(x=abcres$A[1]/2,y=abcres$A[2],paste0('A:n=',nA),col='black', cex=1) # Gr??e
+        plotrix::thigmophobe.labels(x=(abcres$C[1]-abcres$A[1])/2+abcres$A[1],y=abcres$C[2],paste0('B:n=',nB),col='black',cex=1)
       
       }else{
-        thigmophobe.labels(x=abcres$A[1]-0.05,y=abcres$A[2],paste0('A:n=',nA),col='black', cex=1) # Gr??e
-        thigmophobe.labels(x=abcres$C[1]+0.025,y=abcres$C[2]+0.025,paste0('B:n=',nB),col='black',cex=1)
+        plotrix::thigmophobe.labels(x=abcres$A[1]-0.05,y=abcres$A[2],paste0('A:n=',nA),col='black', cex=1) # Gr??e
+        plotrix::thigmophobe.labels(x=abcres$C[1]+0.025,y=abcres$C[2]+0.025,paste0('B:n=',nB),col='black',cex=1)
       
       }
-     thigmophobe.labels(x=(1-abcres$C[1])/2+abcres$C[1],y=abcres$C[2],paste0('C:n=',nC),col='black',cex=1)
+    plotrix::thigmophobe.labels(x=(1-abcres$C[1])/2+abcres$C[1],y=abcres$C[2],paste0('C:n=',nC),col='black',cex=1)
   }  
   }
 }else{ 
@@ -110,22 +111,22 @@ if(style==FALSE){
   #Grenzpunkte Zeichen
   
     if(abs(abcres$A[1]-abcres$C[1])>0.1){
-      thigmophobe.labels(x=abcres$A[1],y=abcres$A[2],'A|B',col=farb.col[2], cex=1) # Gr??e
-      thigmophobe.labels(x=abcres$C[1],y=abcres$C[2],'B|C',col=farb.col[2],cex=1)
+      plotrix::thigmophobe.labels(x=abcres$A[1],y=abcres$A[2],'A|B',col=farb.col[2], cex=1) # Gr??e
+      plotrix::thigmophobe.labels(x=abcres$C[1],y=abcres$C[2],'B|C',col=farb.col[2],cex=1)
     
     }else{
-      thigmophobe.labels(x=abcres$A[1]-0.05,y=abcres$A[2],'A|B',col=farb.col[2], cex=1) # Gr??e
-      thigmophobe.labels(x=abcres$C[1]+0.025,y=abcres$C[2]+0.025,'B|C',col=farb.col[2],cex=1)
+      plotrix::thigmophobe.labels(x=abcres$A[1]-0.05,y=abcres$A[2],'A|B',col=farb.col[2], cex=1) # Gr??e
+      plotrix::thigmophobe.labels(x=abcres$C[1]+0.025,y=abcres$C[2]+0.025,'B|C',col=farb.col[2],cex=1)
     
     }
   #ABC gruppen (Buchstaben)
-    thigmophobe.labels(x=abcres$A[1]/2,y=abcres$A[2]/4,'A',col=farb.col[6], cex=2.6) # Gr??e 
-    thigmophobe.labels(x=(abcres$A[1]+abcres$C[1])/2,y=abcres$A[2]/4,'B',col=farb.col[6],cex=2.1)
-    thigmophobe.labels(x=(abcres$A[1]+abcres$C[1])/2+max(abs(abcres$A[1]-abcres$C[1]),0.1),y=abcres$A[2]/4,'C',col=farb.col[6],cex=1.8)
+  plotrix::thigmophobe.labels(x=abcres$A[1]/2,y=abcres$A[2]/4,'A',col=farb.col[6], cex=2.6) # Gr??e 
+  plotrix::thigmophobe.labels(x=(abcres$A[1]+abcres$C[1])/2,y=abcres$A[2]/4,'B',col=farb.col[6],cex=2.1)
+  plotrix::thigmophobe.labels(x=(abcres$A[1]+abcres$C[1])/2+max(abs(abcres$A[1]-abcres$C[1]),0.1),y=abcres$A[2]/4,'C',col=farb.col[6],cex=1.8)
 if(!is.null(Data)){
-   thigmophobe.labels(x=abcres$A[1]/2,y=abcres$A[2]/4-0.05,paste0('n=',nA),col='black', cex=0.8) # Gr??e
-   thigmophobe.labels(x=(abcres$A[1]+abcres$C[1])/2,y=abcres$A[2]/4-0.05,paste0('n=',nB),col='black',cex=0.8)
-   thigmophobe.labels(x=(abcres$A[1]+abcres$C[1])/2+max(abs(abcres$A[1]-abcres$C[1]),0.1)+0.02,y=abcres$A[2]/4-0.05,paste0('n=',nC),col='black',cex=0.8)
+  plotrix::thigmophobe.labels(x=abcres$A[1]/2,y=abcres$A[2]/4-0.05,paste0('n=',nA),col='black', cex=0.8) # Gr??e
+  plotrix::thigmophobe.labels(x=(abcres$A[1]+abcres$C[1])/2,y=abcres$A[2]/4-0.05,paste0('n=',nB),col='black',cex=0.8)
+  plotrix::thigmophobe.labels(x=(abcres$A[1]+abcres$C[1])/2+max(abs(abcres$A[1]-abcres$C[1]),0.1)+0.02,y=abcres$A[2]/4-0.05,paste0('n=',nC),col='black',cex=0.8)
 }    
    # detach(package:plotrix)
   #Markierungen y-Achse

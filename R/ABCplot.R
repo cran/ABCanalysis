@@ -48,10 +48,13 @@ if(missing(style)){
   farb.labels <- c(expression(italic("data")),expression(italic("identity")),expression(italic("uniform")),'')
 
 }else{
-
+  #ylab='yield Y'
+  #xlab='effort E'
+  #farb.col=c('blue','palegreen4','palegreen3') 
   ylab='fraction of sum of largest data'
   xlab='fraction of data'
   farb.col=c('blue',colors()[452],'green',colors()[175])
+  #farb.labels <- c(expression(italic("data")),expression(italic("identity")),expression(italic("uniform")),expression(italic("equilibrium")))
   farb.labels <- c(expression(italic("data")),expression(italic("identity")),expression(italic("uniform")),expression(italic("equilibrium")))
 
 }
@@ -133,6 +136,15 @@ if(defaultAxes){
         legend("bottomright",bty = "n",legend=farb.labels,text.col=farb.col)
   }  
 }
-
+#print('test2')
+# if(!missing(style)){
+#   #requireRpackage('Hmisc')
+#         minor.tick(ny=20, nx=20)
+#         box()
+#         }else{
+#           minor.tick(ny=20, nx=20)
+#           box(col='grey')
+#         }
+#print('test3')
 invisible(list(ABCx=Effort,ABCy=Yield))
 }

@@ -22,8 +22,24 @@ vector[1:n] describes an array of data: n cases in rows of one variable
 
 \value{
 Output is of type list which parts are described in the following
-	\item{ABCx}{vector [1:k], cumulative population in percent}
-	\item{ABCy}{vector [1:k], cumulative high data in percent}
+	\item{Curve}{
+	 A list with
+	 
+	 \code{Effort}:vector [1:k], cumulative population in percent
+
+	\code{Yield}: vector [1:k], cumulative high data in percent
+	
+	}
+	\item{CleanedData}{vector [1:m], columnvector containing Data>=0 and zeros for all NA, NaN and negative values in Data(1:n)}
+		\item{Slope}{
+
+	 A list with
+	 
+	 \code{p}: X-values for spline interpolation, defualt: p = (0:0.01:1)
+
+	\code{dABC}: first deviation of the functio ABC(p)=Effort(Yield
+	
+}
 }
 
 \author{

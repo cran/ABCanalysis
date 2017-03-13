@@ -1,13 +1,13 @@
 ABCanalysis=function(Data,ABCcurvedata,PlotIt=FALSE){
 # abcres = ABCanalysis(Data=ABCcleanData(Data)$CleanedData)
 # divide the Data in 3 classes A, B,C
-# A==Data(Aind) : mit wenig aufwand viel ertrag! 
+# A==Data(Aind) : mit wenig aufwand viel ertrag!
 # B==Data(Bind) : Aufwand und ertrag halten sich die Waage
 # C==Data(Cind) : viel Aufwand, wenig Ertrag
 #
 # Grenzziehung AB: minimaler Abstand zum ideal [0,1]
-# Grenzziehung BC: 
-# 
+# Grenzziehung BC:
+#
 # INPUT
 # Data(1:n)                 Ungleichverteilung so dass ABC Analyse sinnvoll ist
 #
@@ -17,24 +17,27 @@ ABCanalysis=function(Data,ABCcurvedata,PlotIt=FALSE){
 #
 # OUTPUT
 # Aind,Bind,Cind              so dass:
-#                             A==Data(Aind) : mit wenig aufwand viel ertrag! 
+#                             A==Data(Aind) : mit wenig aufwand viel ertrag!
 #                             B==Data(Bind) : Aufwand und ertrag halten sich die Waage
 #                             C==Data(Cind) : viel Aufwand, wenig Ertrag
 # smallestAData: Grenzziehung AB: minimaler Abstand zum ideal [0,1]
-# smallestBData: Grenzziehung BC: Steigung der ABC kurve == 1  
+# smallestBData: Grenzziehung BC: Steigung der ABC kurve == 1
 #
 # AlimitIndInInte\rpolation,BlimitIndInInterpolation    indices der ABC genzen in [p,ABC]
 # [p,ABC]                                              die interpolationskurve des ABC plots.
-# 
+#
 # A=c(Ax,Ay)              Pareto point, Minimum distance to (0,1) = minimal Unrealized potential == min in Effort und min in (1-
-# B=c(Bx,By)              BreakEven Point: dABC(Bx) == 1 
-# C=c(Cx,Cy)             Submarginal Point: Minimum distance to (Bx,1) 
+# B=c(Bx,By)              BreakEven Point: dABC(Bx) == 1
+# C=c(Cx,Cy)             Submarginal Point: Minimum distance to (Bx,1)
 # ABexchanged             bool, TRUEif Point A is the BreakEven and point B is the Pareto Point, 0 otherwise
 
-  
+
 # author: MT 11/2014
 #
 
+requireNamespace("plotrix")
+
+  
 #Uses:
 # ABCcurve, im else-Fall: ABCanalysisPlot
 if(missing(Data)){
@@ -42,15 +45,16 @@ if(missing(Data)){
   Data=NULL #Dann muss ABCcurvedata vorhanden sein
   }
 }
-  
+
 if(!PlotIt){#Wenn nicht geplottet wird muessen die Daten berechnet werden
   if(missing(ABCcurvedata)){
-    # CleanData=1; # bedeutet die kleinen Yieldwerte, die in Summme <0.5% der Gesamtyield 
+    # CleanData=1; # bedeutet die kleinen Yieldwerte, die in Summme <0.5% der Gesamtyield
      ABCcurvedata = ABCcurve(Data)
-  } 
-  
+  }
+
   Effort=ABCcurvedata$Curve[,'Effort']
   Yield=ABCcurvedata$Curve[,'Yield']
+  
 
 #   Indizies=ABCcurvedata$DataInd
 #Distanz zum 0,1 Punkt ueber Euklid berechnet
@@ -61,22 +65,22 @@ if(!PlotIt){#Wenn nicht geplottet wird muessen die Daten berechnet werden
     distPareto[i]=sum(abs(point-curve[i,])^2)
   }
   ParetoPointInd=which.min(distPareto) #First Minimun
-# Bestimme den AB Punkt auf der Spline Kurve  
+# Bestimme den AB Punkt auf der Spline Kurve
+  
   ParetoPoint=curve[ParetoPointInd,]
-# Fuer den Punkt BC bestimme die Ableitung der Kurve 
+# Fuer den Punkt BC bestimme die Ableitung der Kurve
 
 #   n=length(Effort)
-#   Curvengleichung=splinefun(Effort,Yield) 
+#   Curvengleichung=splinefun(Effort,Yield)
 #   ableitung=Curvengleichung(1:n/n,1)
-
    ableitung=ABCcurvedata$Slope[,'dABC']
 # Suche das Minimum zur Differenz Ableitung vordefiniete Steigung
   BreakEvenInds=which.min(abs(ableitung - 1))  #Schraenkt B ein, Ableitung==1
 
-# Bestimme die Werte der Spline Kurve an dem BC Punkt 
+# Bestimme die Werte der Spline Kurve an dem BC Punkt
 BreakEvenInd=max(BreakEvenInds)# falls es mehr als 1 gibt nimm den rechtesten
   BreakEvenPoint=curve[BreakEvenInd,] #Last
-  
+
 if(Effort[BreakEvenInd]<Effort[ParetoPointInd]){
     ABexchanged=TRUE
     JurenInd=BreakEvenInd
@@ -98,30 +102,40 @@ if(Effort[BreakEvenInd]<Effort[ParetoPointInd]){
   for(i in 1:length(Effort)){
     distBx[i]=sum(abs(Juren-curve[i,])^2)
   }
-  bgrenze=which.min(distBx) #First Minimun 
+  bgrenze=which.min(distBx) #First Minimun
 #print(curve[bgrenze[1],])
-  
-C=curve[bgrenze[1],]
 
+C=curve[bgrenze[1],]
 
 
 ## Datenvektor in 3 Gruppen Teilen
 
-if(!is.null(Data)){ 
+if(!is.null(Data)){
+
+  # berechne die Werte an den entsprechenden Grenzpositionen
+  ABLimit = sort(Data, decreasing = T)[round(A[1]*length(Data))]
+  BCLimit = sort(Data, decreasing = T)[round(C[1]*length(Data))]
+
+  Aind = which(Data > ABLimit)
+  Bind = which((Data <= ABLimit) & (Data >= BCLimit))
+  Cind = which(Data < BCLimit)
+# browser()
+  
 #Statt nach in Y-Werten suchen, suchen wir in x-Werten, da diese Eindeutig
 #y-Werte koennen dagegen in spezialfaellen mehrfach belegt sein
-    Indizies=order(Data,decreasing=TRUE)
-    rows=length(Data)
-    x=1:rows/rows
+   # Indizies=order(Data,decreasing=TRUE)
+    #rows=length(Data)
+    #x=1:rows/rows
 # Vergleiche empirische Kurve mit generierten Ma? aus theoretischer Spline Kurve
-    Aindvor=which(x<A[1],arr.ind=TRUE)# Suche alle Indizes bis zur ABGrenze
-    ABind=which(x<C[1],arr.ind=TRUE) # Suche alle Indizes bis zur BCgrenze
+    #Aindvor=which(x<A[1],arr.ind=TRUE)# Suche alle Indizes bis zur ABGrenze
+    #ABind=which(x<C[1],arr.ind=TRUE) # Suche alle Indizes bis zur BCgrenze
 #Setzte in unsortierten Datenvektor die Indizes
-    Bind=Indizies[setdiff(ABind,Aindvor)] #Bindizes sind Differenz aus den beiden Zeilen davor
-    Aind=Indizies[Aindvor] 
-    Cind=Indizies[which(x>C[1],arr.ind=TRUE)]
 
-# #Zuerst: Generiere empirische Kurven direkt aus den Daten  
+    #Bind=Indizies[setdiff(ABind,Aindvor)] #Bindizes sind Differenz aus den beiden Zeilen davor
+    #Aind=Indizies[Aindvor]
+    #Cind=Indizies[which(x>C[1],arr.ind=TRUE)]
+
+# #Zuerst: Generiere empirische Kurven direkt aus den Daten
 #        sorted=sort(na.last=T,Data,decreasing=TRUE)
 #        Indizies=order(Data,decreasing=TRUE)
 #        N=sum(Data)
@@ -132,7 +146,7 @@ if(!is.null(Data)){
 #     ABind=which(y<C[2],arr.ind=TRUE) # Suche alle Indizes bis zur BCgrenze
 # #Setzte in unsortierten Datenvektor die Indizes
 #     Bind=Indizies[setdiff(ABind,Aindvor)] #Bindizes sind Differenz aus den beiden Zeilen davor
-#     Aind=Indizies[Aindvor] 
+#     Aind=Indizies[Aindvor]
 #     Cind=Indizies[which(y>C[2],arr.ind=TRUE)]
 }else{ #Keine empirischer Datensatz sondern vorgabe theoretischer Kurve
   Bind=NULL
@@ -140,13 +154,15 @@ if(!is.null(Data)){
   Aind=NULL
   warning('No Data given: Calculating curve and points by given ABCcurvedata')
 }
-  return(list(Aind=Aind,Bind=Bind,Cind=Cind,ABexchanged=ABexchanged,A=A,B=B,C=C,smallestAData=Yield[JurenInd],smallestBData=Yield[bgrenze],AlimitIndInInterpolation=JurenInd,BlimitIndInInterpolation=bgrenze,p=Effort,ABC=Yield))
+return(list(Aind=Aind,Bind=Bind,Cind=Cind,ABexchanged=ABexchanged,A=A,B=B,C=C,smallestAData=Yield[JurenInd],
+            smallestBData=Yield[bgrenze],AlimitIndInInterpolation=JurenInd,BlimitIndInInterpolation=bgrenze,p=Effort,ABC=Yield,
+            ABLimit = ABLimit, BCLimit = BCLimit))
   #Falls Plot erwuenscht
   }else{ #Dann werden die Daten in ueber ABCanalysisPlot berechnet und ABCplot verwendet
     if(missing(Data)|is.null(Data)){
-      abc=ABCanalysisPlot(ABCcurvedata=ABCcurvedata)$ABCanalysis  
+      abc=ABCanalysisPlot(ABCcurvedata=ABCcurvedata)$ABCanalysis
     }else{
       abc=ABCanalysisPlot(Data)$ABCanalysis
     }
-  }  
+  }
 }
